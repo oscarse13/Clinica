@@ -1,0 +1,685 @@
+@{
+    Layout = null;
+}
+<h3>
+    Gestión Capacidad
+    <small>Registro de Horas !</small>
+</h3>
+<div class="row">
+    <div class="col-lg-8">
+        <!-- START panel-->
+        <div class="panel panel-info">
+            <div ng-class="{'panel-heading-collapsed':panelDemo1}" class="panel-heading">
+                <div ng-controller="DialogMainCtrl" class="pull-right">
+                    <a ng-click="openConfirm()" class="fa fa-star-o text-white"></a>
+                </div>
+                <div class="panel-title">Registro de Horas en:</div>
+                <strong>
+                    {{getPathInfo(subcategoria)}} {{subcategoria}}
+                </strong>
+            </div>
+            <div class="panel-body">
+                <form role="form">
+                    <div class="form-group mb">
+                        <div class="row">
+                            <div class="col-lg-2">
+                                <label>Fecha</label>
+                            </div>
+                            <div class="col-lg-4">
+                                <input type="date" placeholder="Fecha de registro" class="form-control" />
+                            </div>
+                            <div class="col-lg-2">
+                                <div class="checkbox c-checkbox">
+                                    <label>
+                                        <input type="checkbox" checked="" ng-model="tipofecha" ng-init="tipofecha=true" />
+                                        <span class="fa fa-check"></span>Totales
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <input type="Number" placeholder="Horas totales tarea" ng-hide="!tipofecha" max="9" min="0.25" step="0.25" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-hide="tipofecha" ng-controller="TimepickerDemoCtrl as tpick" class="form-group mb">
+                        <div class="row">
+                            <div class="col-lg-2">
+                                <lable>Inicio</lable>
+                            </div>
+                            <div class="col-lg-4">
+                                <uib-timepicker name="timepickr" required="" ng-model="tpick.mytime" ng-change="tpick.changed()" hour-step="tpick.hstep" minute-step="tpick.mstep" show-meridian="tpick.ismeridian"></uib-timepicker>
+                            </div>
+                            <div class="col-lg-2">
+                                <lable>Fin</lable>
+                            </div>
+                            <div class="col-lg-3">
+                                <uib-timepicker name="timepickr" required="" ng-model="tpick.mytime" ng-change="tpick.changed()" hour-step="tpick.hstep" minute-step="tpick.mstep" show-meridian="tpick.ismeridian"></uib-timepicker>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group mb">
+                        <div class="row">
+                            <div class="col-lg-2">
+                                <label>Actividad</label>
+                            </div>
+                            <div class="col-lg-10">
+                                <select chosen="" ng-model="subcategoria" ng-change="getPathInfo(subcategoria)" width="'100%'" class="chosen-select input-md">
+                                    <option value=""></option>
+                                    <optgroup label="Administrativos">
+                                        <option>Lectura de Correos</option>
+                                        <option>Actividades Corporativas</option>
+                                        <option>Vacaciones y Licencias Remuneradas</option>
+                                        <option>Tiempo para tí</option>
+                                        <option>Clases</option>
+                                        <option>Incapacidades</option>
+                                        <option>Permisos</option>
+                                        <option>Pausas activas</option>
+                                        <option>Reuniones de Trabajo Analistas</option>
+                                        <option>Gestión de viáticos en I-viajes</option>
+                                        <option>Desplazamientos en función de sus labores</option>
+                                        <option>Gestión de Jefes y Directivos</option>
+                                        <option>Licencias no Remuneradas</option>
+                                        <option>Compensatorio por Disponibilidad</option>
+                                    </optgroup>
+                                    <optgroup label="Proyectos">
+                                        <option>Idea</option>
+                                        <option>Inicio</option>
+                                        <option>Planeación</option>
+                                        <option>Ejecución</option>
+                                        <option>Seguimiento y control</option>
+                                        <option>Cierre</option>
+                                    </optgroup>
+                                    <optgroup label="Requerimientos">
+                                        <option>Inicio</option>
+                                        <option>Planeación</option>
+                                        <option>Ejecución</option>
+                                        <option>Seguimiento y control</option>
+                                        <option>Cierre</option>
+                                    </optgroup>
+                                    <optgroup label="Operación">
+                                        <option>Instalación, configuración y afinación de aplicaciones</option>
+                                        <option>Procesos de Producción</option>
+                                        <option>Gestión de Respaldos</option>
+                                        <option>Mantenimiento y actualización a HW</option>
+                                        <option>Mantenimiento y actualización a Bases de Datos</option>
+                                        <option>Mantenimiento y actualización a Sistemas Operativos</option>
+                                        <option>Gestión de Niveles de Servicio de TI</option>
+                                        <option>Gestión de Seguridad</option>
+                                        <option>Relación con Entes de Control</option>
+                                        <option>Administración del CCP y CCA</option>
+                                        <option>Gestión de eventos y monitoreo de disponibilidad</option>
+                                        <option>Gestión d Cambios</option>
+                                        <option>Análisis y conclusión sobre estadísticas</option>
+                                        <option>Tareas proactivas de mantenimiento</option>
+                                        <option>Gestión de la Calidad</option>
+                                        <option>Administración de Contratos con Proveedores</option>
+                                        <option>Comités de Operación</option>
+                                    </optgroup>
+                                    <optgroup label="Soporte">
+                                        <option>Gestión de Solicitudes de Servicio</option>
+                                        <option>Gestión de Incidentes</option>
+                                        <option>Asesoria Usuarios</option>
+                                        <option>Gestión de Problemas</option>
+                                        <option>Gestión de Activos Tecnológicos (CMBD)</option>
+                                    </optgroup>
+                                    <optgroup label="Finanzas TI">
+                                        <option>Administración de facturas y órdenes de compra</option>
+                                        <option>Administración CAPEX</option>
+                                        <option>Administración OPEX</option>
+                                        <option>Adminstración de Costos TI</option>
+                                    </optgroup>
+                                    <optgroup label="Gobierno TI">
+                                        <option>Administración del Gobierno -Comités</option>
+                                        <option>Gestión de Portafolio</option>
+                                        <option>Estrategia TI</option>
+                                        <option>Metodologías</option>
+                                        <option>Indicadores de Gestión TI</option>
+                                    </optgroup>
+                                    <optgroup label="Recursos Humanos TI">
+                                        <option>Plan de Trabajo (Asignación)</option>
+                                        <option>Gestión del Conocimiento</option>
+                                        <option>Gestión del desempeño</option>
+                                        <option>Apoyo en la selección</option>
+                                        <option>Grupos Primarios - Comités</option>
+                                    </optgroup>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group mb">
+                        <div class="row">
+                            <div class="col-lg-2">
+                                <label>Área de Negocio</label>
+                            </div>
+                            <div class="col-lg-10">
+                                <select chosen="" ng-model="areanegocio" width="'100%'" class="chosen-select input-md">
+                                    <option>Asuntos Corporativos</option>
+                                    <option>Auditoría</option>
+                                    <option>Canales alternos</option>
+                                    <option>Cdiscount</option>
+                                    <option>Comercio directo</option>
+                                    <option>Comunicaciones</option>
+                                    <option>Didetexco</option>
+                                    <option>EDS</option>
+                                    <option>Fondo de empleados - Presente</option>
+                                    <option>Fondo Futuro</option>
+                                    <option>Fundación Éxito</option>
+                                    <option>Gerencia del Cliente</option>
+                                    <option>Industria Alimentos</option>
+                                    <option>Informática</option>
+                                    <option>Logística</option>
+                                    <option>Móvil Éxito</option>
+                                    <option>Presidencia</option>
+                                    <option>Revisoría Fiscal</option>
+                                    <option>Seguros Éxito – Suramericana</option>
+                                    <option>Servicios Éxito</option>
+                                    <option>TodoHogar</option>
+                                    <option>TuBoleta</option>
+                                    <option>Tuya</option>
+                                    <option>Ventas por catalogo</option>
+                                    <option>Viajes Éxito</option>
+                                    <option>VP Comercial y Abastecimiento</option>
+                                    <option>VP Financiera</option>
+                                    <option>VP Inmobiliaria</option>
+                                    <option>VP Internacional</option>
+                                    <option>VP Mercadeo</option>
+                                    <option>VP Recursos Humanos</option>
+                                    <option>VP Retail</option>
+                                    <option>VP Servicios Éxito</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-show="getPathInfo(subcategoria).indexOf('Proyectos') &gt; -1" class="form-group mb">
+                        <div class="row">
+                            <div class="col-lg-2">
+                                <label>Proyecto</label>
+                            </div>
+                            <div class="col-lg-10">
+                                <select chosen="" ng-model="proyecto" ng-change="getPathInfo(subcategoria)" width="'100%'" class="chosen-select input-md">
+                                    <option value=""></option>
+                                    <optgroup label="Mis Proyectos">
+                                        <option>Proyecto 1</option>
+                                        <option>Proyecto 2</option>
+                                        <option>Proyecto 3</option>
+                                    </optgroup>
+                                    <optgroup label="Otros Proyectos">
+                                        <option>Proyecto 4</option>
+                                        <option>Proyecto 5</option>
+                                        <option>Proyecto 6</option>
+                                    </optgroup>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-show="getPathInfo(subcategoria).indexOf('Soporte') &gt; -1" class="form-group mb">
+                        <div class="row">
+                            <div class="col-lg-2">
+                                <label>Aplicación</label>
+                            </div>
+                            <div class="col-lg-10">
+                                <select chosen="" ng-model="aplicacion" ng-change="getPathInfo(subcategoria)" width="'100%'" class="chosen-select input-md">
+                                    <option>Access Control Server (ACS)</option>
+                                    <option>Accumark (SW de tercero para patronaje y trazo)</option>
+                                    <option>ACL</option>
+                                    <option>ACS (Sistema de Autenticación, autorización y auditoria)</option>
+                                    <option>ACSI (Control de ingreso visitantes)</option>
+                                    <option>Almacenamiento</option>
+                                    <option>AM - CAU Mantenimiento</option>
+                                    <option>AntiSpam</option>
+                                    <option>Antivirus</option>
+                                    <option>ArcGis - Sistema de Información geográfico</option>
+                                    <option>ATG (Éxito.com y carulla.com)</option>
+                                    <option>Autocontrol</option>
+                                    <option>Bancor</option>
+                                    <option>Cambio Clave</option>
+                                    <option>Cambios de Mercancía</option>
+                                    <option>CAP</option>
+                                    <option>Carpetas en el Z</option>
+                                    <option>Cdiscount (Cdiscount.com.co)</option>
+                                    <option>Celuweb Aliados</option>
+                                    <option>CEN -Financiero</option>
+                                    <option>Central de Monitoreo</option>
+                                    <option>Centro de Computo (Sistema eléctrico, Aire Acondicionado, Seguridad física)</option>
+                                    <option>Centro de cómputo TI (Servidores, Storage, Telecomunicaciones)</option>
+                                    <option>Certificación Electrónica</option>
+                                    <option>Clarity</option>
+                                    <option>COGNOS</option>
+                                    <option>Conciliador y Comprobantes</option>
+                                    <option>Conexión Remota (VPN)</option>
+                                    <option>Consola central – BSM HP</option>
+                                    <option>Consultas 400</option>
+                                    <option>Control de acceso - Continuum</option>
+                                    <option>Controladores POS</option>
+                                    <option>Controladores WINDOWS</option>
+                                    <option>Convenios Comerciales</option>
+                                    <option>Corel Draw</option>
+                                    <option>Correspondencia Interna</option>
+                                    <option>Corresponsal Bancario</option>
+                                    <option>CPicking</option>
+                                    <option>CRM – Vista 360°</option>
+                                    <option>CRM OPERATIVO - Clifre On-line, Clifre backend</option>
+                                    <option>CRONOS</option>
+                                    <option>Cuadre de facturas - Cirec web</option>
+                                    <option>Data Loss Prevention (DLP)</option>
+                                    <option>Descuentos (Comerciales, Fidelización, Empleados, Mensajes)</option>
+                                    <option>Didetexco 2000</option>
+                                    <option>Directorio Activo</option>
+                                    <option>Dispositivo móvil (Celular, tablet, Ipad)</option>
+                                    <option>Dober - Sistema de Impuestos</option>
+                                    <option>DOCUWARE</option>
+                                    <option>Domicilios - Éxito y Carulla</option>
+                                    <option>DRP- Disaster Recovery Plan</option>
+                                    <option>EDI</option>
+                                    <option>EKP - Clase Virtual</option>
+                                    <option>Embajadoras</option>
+                                    <option>Encuestas</option>
+                                    <option>Enlace</option>
+                                    <option>Entregas Gran Volumen</option>
+                                    <option>Equipos de escritorio (Computador, Portátil, PC, MAC, PDA)</option>
+                                    <option>Equipos Telecomunicaciones (Hub, Modem, Router, Switche LAN, Switche Wireless)</option>
+                                    <option>ERA Enterprise Risk</option>
+                                    <option>Escaner (Bioptico, mesa, mano)</option>
+                                    <option>Estaciones Symantec DLO</option>
+                                    <option>F1</option>
+                                    <option>Factoring</option>
+                                    <option>Fiado Éxito</option>
+                                    <option>Ficha Técnica</option>
+                                    <option>Fidelización (Puntos, Campañas y Alianzas)</option>
+                                    <option>Firewall</option>
+                                    <option>Fundación Éxito</option>
+                                    <option>Gabmer Inmobiliaria</option>
+                                    <option>Gastos de Viaje - I-viajes</option>
+                                    <option>Gestión de Indicadores TI</option>
+                                    <option>Gestión de la Capacidad TI</option>
+                                    <option>Gestión de Precios</option>
+                                    <option>Gestión de Respaldos SGR</option>
+                                    <option>Gestor de Logs</option>
+                                    <option>Gestor Vulnerabilidades</option>
+                                    <option>Giros y Remesas</option>
+                                    <option>Go Anywhere Director</option>
+                                    <option>Herramientas de Apoyo POS</option>
+                                    <option>HP Service Manager - CAU</option>
+                                    <option>Importados-Comex</option>
+                                    <option>Impresoras</option>
+                                    <option>Infopos</option>
+                                    <option>Infox - Portal Corporativo</option>
+                                    <option>Interfaces con SAP</option>
+                                    <option>Intrusion Prevention System (IPS)</option>
+                                    <option>Inventario Hardware - Software</option>
+                                    <option>Iva e Impoconsumo</option>
+                                    <option>Kioskos</option>
+                                    <option>Laboratorio Calidad Industria</option>
+                                    <option>Lotus</option>
+                                    <option>Mantenimiento Unidades Móviles</option>
+                                    <option>Mantis</option>
+                                    <option>Marcas Propias</option>
+                                    <option>Materias Primas</option>
+                                    <option>MDM (Master Data Manager)</option>
+                                    <option>Medios de Pago (TEF)</option>
+                                    <option>Microsoft Exchange</option>
+                                    <option>Microsoft Lync</option>
+                                    <option>Microsoft Office (Outlook, Excel, Word, PowerPoint)</option>
+                                    <option>Microstrategy</option>
+                                    <option>MifarePOS</option>
+                                    <option>Modulo de seguridad</option>
+                                    <option>Móvil Éxito (Página web, MVNE Redknee, SIME)</option>
+                                    <option>Navegación en Internet (Proxy Webgateway)</option>
+                                    <option>Negociaciones</option>
+                                    <option>NEON</option>
+                                    <option>NETBACKUP – VERITAS</option>
+                                    <option>Network Acces Control (NAC)</option>
+                                    <option>No aplica</option>
+                                    <option>Opcon</option>
+                                    <option>Operations Center</option>
+                                    <option>OPS Center Analytics – Netbackup</option>
+                                    <option>Optimización de Precios - DemandTec</option>
+                                    <option>Optimización de Surtido y Espacio - INTACTIX</option>
+                                    <option>Optiplan (SW de tercero)</option>
+                                    <option>Pagina Web Inmobiliaria</option>
+                                    <option>Peso Variable (Liquidación-Pre liquidación, Balanzas)</option>
+                                    <option>PGP</option>
+                                    <option>Picking Éxito .com</option>
+                                    <option>PLAN SEPARE Sistema de Reservados o Separados de Mercancía</option>
+                                    <option>Planeación de trazo y Corte</option>
+                                    <option>Plataforma Arquitectura POS</option>
+                                    <option>Portafolio de Proyectos</option>
+                                    <option>Portal Proveedores Financiero</option>
+                                    <option>Portal Viva</option>
+                                    <option>POS</option>
+                                    <option>POSFECHADOS Sistema de cheques posfechados</option>
+                                    <option>PQR</option>
+                                    <option>Prefacturación de Seguridad</option>
+                                    <option>Premontajes</option>
+                                    <option>Producción Centralizada</option>
+                                    <option>Producto Terminado</option>
+                                    <option>Propiedad Intelectual</option>
+                                    <option>Puntos 3.0</option>
+                                    <option>Queue Busting</option>
+                                    <option>Radio Frecuencias (Access Point y Port, Terminales y baterias RF e Impresoras ZEBRAS Portátiles)</option>
+                                    <option>Recaudos Propios y Terceros</option>
+                                    <option>Red Humana</option>
+                                    <option>Red Inalámbrica WIFI</option>
+                                    <option>Registro de Eventos Contra la Transparencia</option>
+                                    <option>Registro de incidentes de riesgos y seguridad</option>
+                                    <option>Registro de la Venta</option>
+                                    <option>Relojes Biométricos</option>
+                                    <option>Respuesta oportuna al cliente ROC</option>
+                                    <option>ROC Garantias</option>
+                                    <option>Rotar - E3</option>
+                                    <option>SAC - Sistema de Administración de Contactos</option>
+                                    <option>SAP (R3)</option>
+                                    <option>SAP BO</option>
+                                    <option>SAP BW</option>
+                                    <option>SAP HANA</option>
+                                    <option>SAP PO</option>
+                                    <option>SAP Solution Manager</option>
+                                    <option>SAS</option>
+                                    <option>Servidores (AS400, AIX, Alpha, Blade Windows, ClearPath, Rack Windows, SC10, Teradata, Windows, Linux)</option>
+                                    <option>SharePoint 2010</option>
+                                    <option>SharePoint 2013</option>
+                                    <option>SI2 - Flujo de trabajo Inmobiliaria</option>
+                                    <option>SICA</option>
+                                    <option>Simulador de Surtido</option>
+                                    <option>Simulador NEGOCIADOR</option>
+                                    <option>SINCO - Sistema Comercial</option>
+                                    <option>SINEMAX - CRM analítico, DWH Comercial y Logístico</option>
+                                    <option>SISCA-PRO</option>
+                                    <option>Sistemas Operativos (Windows o Server)</option>
+                                    <option>Sitio Web de proveedores (Portal de Proveedores Didetexco)</option>
+                                    <option>Sitio Web Fundación</option>
+                                    <option>Sitio Web TodoHogar</option>
+                                    <option>Sitios Corporativos</option>
+                                    <option>SMA, EMS, TOF, EJ, SW POS BASE</option>
+                                    <option>Solicitudes de Desarrollo TI</option>
+                                    <option>Sorteos</option>
+                                    <option>Suministros (Solicitud de Pedidos Internos)</option>
+                                    <option>Switch - PinPad</option>
+                                    <option>System Center Configuration Manager</option>
+                                    <option>Tarjeta Cambio</option>
+                                    <option>Tarjeta Éxito</option>
+                                    <option>Tarjeta Presente</option>
+                                    <option>Tarjeta Regalo</option>
+                                    <option>Telecomunicaciones (Core Lan)</option>
+                                    <option>Telecomunicaciones (Red Wan, Internet Corporativo, Extranet)</option>
+                                    <option>Telecomunicaciones (Videoconferencias)</option>
+                                    <option>TERADATA</option>
+                                    <option>TESORO Sistema de Tesorería</option>
+                                    <option>TIMERA - Programación de Jornadas de Trabajo</option>
+                                    <option>Toma Física (TFA)</option>
+                                    <option>Transfer</option>
+                                    <option>Transnetwork</option>
+                                    <option>Uni2</option>
+                                    <option>Unidades en Proceso</option>
+                                    <option>Valores Asegurables</option>
+                                    <option>Venta de Contenido</option>
+                                    <option>VENTA EDS : Servipunto EDS</option>
+                                    <option>Ventas en Línea</option>
+                                    <option>Viajes Éxito</option>
+                                    <option>Virtualización</option>
+                                    <option>Web Link</option>
+                                    <option>Web site administración documentos (Doce)</option>
+                                    <option>WMS</option>
+                                    <option>Workflow</option>
+                                    <option>WorkFlow de Recursos Humanos</option>
+                                    <option>Zoftkrates</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group mb">
+                        <div class="row">
+                            <div class="col-lg-2">
+                                <label>Descripción</label>
+                            </div>
+                            <div class="col-lg-10">
+                                <input type="text" placeholder="Descripción de la tarea" maxlenght="256" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div ng-controller="ToasterDemoCtrl as toast" ng-init="toast.toaster.title='Guardo exitoso'; toast.toaster.text='Su registro se ha guardado exitosamente'" class="panel-footer">
+                <div class="clearfix">
+                    <div class="pull-right">
+                        <toaster-container toaster-options="{'position-class': 'toast-bottom-right', 'close-button':true}"></toaster-container>
+                        <button type="button" ng-click="toast.pop()" class="btn btn-labeled btn-success">
+                            <span class="btn-label">
+                                <i class="fa fa-save"></i>
+                            </span>Guardar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END panel-->
+    </div>
+    <div class="col-lg-4">
+        <!-- START bar chart-->
+        <div id="panelChart3" class="panel">
+            <div class="panel-heading">
+                <!-- START button group-->
+                <div uib-dropdown="dropdown2" class="pull-right btn-group">
+                    <button type="button" uib-dropdown-toggle="" class="btn btn-default btn-sm">Mensual</button>
+                    <ul role="menu" class="dropdown-menu fadeInLeft animated">
+                        <li>
+                            <a href="#">Diario</a>
+                        </li>
+                        <li>
+                            <a href="#">Semanal</a>
+                        </li>
+                        <li>
+                            <a href="#">Mensual</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- END button group-->
+                <div class="panel-title">Dedicación Proyectos</div>
+            </div>
+            <div uib-collapse="panelChart3" class="panel-wrapper">
+                <div class="panel-body">
+                    <flot src="'server/chart/barstackedv2.json'" options="dash2.barStackedOptions" height="250px"></flot>
+                </div>
+            </div>
+        </div>
+        <!-- END bar chart-->
+    </div>
+</div>
+<div class="unwrap mv-lg">
+    <!-- START chart-->
+    <div id="panelChart9" class="panel">
+        <div class="panel-heading">
+            <!-- START button group-->
+            <div uib-dropdown="dropdown1" class="pull-right btn-group">
+                <button type="button" uib-dropdown-toggle="" class="btn btn-default btn-sm">Ultimo año</button>
+                <ul role="menu" class="dropdown-menu fadeInLeft animated">
+                    <li>
+                        <a href="#">2013</a>
+                    </li>
+                    <li>
+                        <a href="#">2014</a>
+                    </li>
+                    <li>
+                        <a href="#">2015</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="#">Ultimo año</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- END button group-->
+            <div class="panel-title">Generación de Valor</div>
+        </div>
+        <div uib-collapse="panelChart9" class="panel-wrapper">
+            <div class="panel-body">
+                <flot src="'server/chart/splinev2.json'" options="dash2.splineOptions" height="300px"></flot>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-sm-3 col-xs-6 text-center">
+                        <p>Proyectos</p>
+                        <div class="h1">25</div>
+                    </div>
+                    <div class="col-sm-3 col-xs-6 text-center">
+                        <p>Ideas</p>
+                        <div class="h1">85</div>
+                    </div>
+                    <div class="col-sm-3 col-xs-6 text-center">
+                        <p>Horas Total Acumuladas</p>
+                        <div class="h1">380</div>
+                    </div>
+                    <div class="col-sm-3 col-xs-6 text-center">
+                        <p>Horas Teoricas Acumuladas</p>
+                        <div class="h1">390</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END chart-->
+</div>
+<!-- START Multiple List group-->
+<div class="list-group">
+    <a href="#/dashboard_v3" class="list-group-item">
+        <table class="wd-wide">
+            <tbody>
+                <tr>
+                    <td class="wd-xs">
+                        <div class="ph">
+                            <img src="~/Images/dummy.png" alt="" class="media-box-object img-responsive img-rounded thumb64" />
+                        </div>
+                    </td>
+                    <td>
+                        <div class="ph">
+                            <h4 class="media-box-heading">Proyecto 1</h4>
+                            <small class="text-muted">Descripción de proyecto 1</small>
+                        </div>
+                    </td>
+                    <td class="wd-sm hidden-xs hidden-sm">
+                        <div class="ph">
+                            <p class="m0">Ultima Modificación</p>
+                            <small class="text-muted">hace 4 semanas</small>
+                        </div>
+                    </td>
+                    <td class="wd-xs hidden-xs hidden-sm">
+                        <div class="ph">
+                            <p class="m0 text-muted">
+                                <em class="icon-user mr fa-lg"></em>75.5
+                            </p>
+                        </div>
+                    </td>
+                    <td class="wd-xs hidden-xs hidden-sm">
+                        <div class="ph">
+                            <p class="m0 text-muted">
+                                <em class="icon-doc mr fa-lg"></em>3500
+                            </p>
+                        </div>
+                    </td>
+                    <td class="wd-sm">
+                        <div class="ph">
+                            <uib-progressbar value="80" type="success" class="m0 progress-xs">80%</uib-progressbar>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </a>
+</div>
+<div class="list-group">
+    <a href="#/dashboard_v3" class="list-group-item">
+        <table class="wd-wide">
+            <tbody>
+                <tr>
+                    <td class="wd-xs">
+                        <div class="ph">
+                            <img src="~/Images/dummy.png" alt="" class="media-box-object img-responsive img-rounded thumb64" />
+                        </div>
+                    </td>
+                    <td>
+                        <div class="ph">
+                            <h4 class="media-box-heading">Proyecto 2</h4>
+                            <small class="text-muted">Descripción de proyecto 2</small>
+                        </div>
+                    </td>
+                    <td class="wd-sm hidden-xs hidden-sm">
+                        <div class="ph">
+                            <p class="m0">Ultima Modificación</p>
+                            <small class="text-muted">Hoy a las 06:23 am</small>
+                        </div>
+                    </td>
+                    <td class="wd-xs hidden-xs hidden-sm">
+                        <div class="ph">
+                            <p class="m0 text-muted">
+                                <em class="icon-user mr fa-lg"></em>3
+                            </p>
+                        </div>
+                    </td>
+                    <td class="wd-xs hidden-xs hidden-sm">
+                        <div class="ph">
+                            <p class="m0 text-muted">
+                                <em class="icon-doc mr fa-lg"></em>150
+                            </p>
+                        </div>
+                    </td>
+                    <td class="wd-sm">
+                        <div class="ph">
+                            <uib-progressbar value="50" type="purple" class="m0 progress-xs">50%</uib-progressbar>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </a>
+</div>
+<div class="list-group">
+    <a href="#/dashboard_v3" class="list-group-item">
+        <table class="wd-wide">
+            <tbody>
+                <tr>
+                    <td class="wd-xs">
+                        <div class="ph">
+                            <img src="~/Images/dummy.png" alt="" class="media-box-object img-responsive img-rounded thumb64" />
+                        </div>
+                    </td>
+                    <td>
+                        <div class="ph">
+                            <h4 class="media-box-heading">Idea 3</h4>
+                            <small class="text-muted">Descripción de Idea 3</small>
+                        </div>
+                    </td>
+                    <td class="wd-sm hidden-xs hidden-sm">
+                        <div class="ph">
+                            <p class="m0">Ultima Modificación</p>
+                            <small class="text-muted">Ayer a las 10:20 pm</small>
+                        </div>
+                    </td>
+                    <td class="wd-xs hidden-xs hidden-sm">
+                        <div class="ph">
+                            <p class="m0 text-muted">
+                                <em class="icon-user mr fa-lg"></em>15
+                            </p>
+                        </div>
+                    </td>
+                    <td class="wd-xs hidden-xs hidden-sm">
+                        <div class="ph">
+                            <p class="m0 text-muted">
+                                <em class="icon-doc mr fa-lg"></em>480
+                            </p>
+                        </div>
+                    </td>
+                    <td class="wd-sm">
+                        <div class="ph">
+                            <uib-progressbar value="20" type="green" class="m0 progress-xs">20%</uib-progressbar>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </a>
+    <!-- END dashboard main content-->
+</div>
+<!-- END Multiple List group-->
+<script type="text/ng-template" id="modalDialogId">
+    <div class="ngdialog-message"><h3>Guardar Favorito</h3><p>Ingrese el nombre del favorito a guardar<input ng-model="confirmValue" class="form-control" /></p><button type="button" ng-click="confirm(confirmValue)" class="btn btn-primary mr">Confirmar</button><button type="button" ng-click="closeThisDialog('button')" class="btn btn-default">Cancelar</button></div>
+</script>

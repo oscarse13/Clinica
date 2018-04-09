@@ -1,0 +1,132 @@
+﻿@{
+    Layout = null;
+}
+<h3>
+    Gestión Citas
+    <small>Registro de Citas !</small>
+</h3>
+<div class="row">
+    <div class="alert alert-success" role="alert" id="mensaje">
+        <div id="textoMensaje">Completado - </div>
+    </div>
+    <div class="alert alert-danger" role="alert" id="mensajeError">
+        <div id="textoMensajeError">Error - </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-7">
+        <!-- START panel-->
+        <div class="panel panel-default">
+            <div class="panel-heading">Listado de citas</div>
+            <div class="panel-body">
+                <!-- START table-responsive-->
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th># Cita</th>
+                                <th>Documento</th>
+                                <th>Nombres</th>
+                                <th>Edad</th>
+                                <th>Fecha</th>
+                                <th>Tipo</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="cita in listadoCitas">
+                                <td>{{cita.Id}}</td>
+                                <td>{{cita.Paciente.Documento}}</td>
+                                <td>{{cita.Paciente.Nombre}}</td>
+                                <td>{{cita.Paciente.Edad}}</td>
+                                <td>{{cita.Fecha}}</td>
+                                <td>{{cita.TipoCita.Descripcion}}</td>
+                                <td>
+                                    <button type="button" class="btn btn-sm btn-default" ng-click="editarCita(cita)">
+                                        <em class="fa fa-edit"></em>
+                                    </button>
+                                </td>
+                                <td>
+                                    <button type="button" ng-hide="currentUser.Rol != 'Admin'" class="btn btn-sm btn-default" ng-click="eliminarCita(cita)">
+                                        <em class="fa fa-remove"></em>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- END table-responsive-->
+            </div>
+        </div>
+        <!-- END panel-->
+    </div>
+    <div class="col-lg-5">
+        <!-- START bar chart-->
+        <div id="panelChart3" class="panel">
+            <div class="panel-heading">
+                <div class="panel-title">Registro de Citas</div>
+            </div>
+
+            <div class="panel-body">
+                <form class="form-horizontal" name="registroCita">
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">Documento</label>
+                        <div class="col-lg-10">
+                            <input type="number" name="documento" placeholder="Documento" required ng-model="documento" ng-blur="consultarUsuario()" ng-keydown="($event.keyCode === 13 || $event.keyCode === 32) && consultarUsuario()" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">Nombres</label>
+                        <div class="col-lg-10">
+                            <input type="text" placeholder="Nombres" required ng-model="nombres" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">Edad</label>
+                        <div class="col-lg-10">
+                            <input type="number" placeholder="Edad" required ng-model="edad" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">Sexo</label>
+                        <div class="col-lg-10">
+                            <label class="radio-inline"><input type="radio" ng-model="sexo" value="M" ng-click="validarForm()" name="optradio">Masculino</label>
+                            <label class="radio-inline"><input type="radio" ng-model="sexo" value="F" ng-click="validarForm()" name="optradio">Femenino</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">Tipo</label>
+                        <div class="col-lg-10">
+                            <select ng-model="tipoCita" ng-options="o.name for o in tiposCita" ng-change="validarForm()" placeholder="Seleccione Tipo de cita">
+     
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">Fecha</label>
+                        <div class="col-lg-10">
+                            <div class='input-group date' id='datetimepicker1'>
+                                <input id="fecha" type='text' ng-model="fecha" ng-change="validarForm()" class="form-control" placeholder="Fecha de la cita" />
+                                <span class="input-group-addon" ng-click="validarForm()" >
+                                    <span class="fa fa-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-offset-2 col-lg-10">
+                            <button type="button" class="btn btn-sm btn-default" ng-disabled="!(registroCita.$valid && formValido)" ng-click="registrarCita()">Registrar </button>
+                            <button type="button" class="btn btn-sm btn-default" ng-click="limpiarCita()">Cancelar </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+        <!-- END bar chart-->
+    </div>
+</div>
+<script type="text/ng-template" id="modalDialogId">
+    <div class="ngdialog-message"><h3>Guardar Favorito</h3><p>Ingrese el nombre del favorito a guardar<input ng-model="confirmValue" class="form-control" /></p><button type="button" ng-click="confirm(confirmValue)" class="btn btn-primary mr">Confirmar</button><button type="button" ng-click="closeThisDialog('button')" class="btn btn-default">Cancelar</button></div>
+</script>

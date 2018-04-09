@@ -1,0 +1,21 @@
+[
+  {
+    "text": "Main Navigation",
+    "heading": "true",
+    "translate": "sidebar.heading.HEADER"
+  },
+  {
+    "text": "Gestión Clinica",
+    "sref": "#",
+    "icon": "icon-speedometer",
+    "alert": "3",
+    "label": "label label-info",
+    "submenu": [
+      {
+        "text": "Registrar Citas",
+        "sref": "app.gestioncitas"
+      }
+    ],
+    "translate": "sidebar.nav.DASHBOARD"
+  }
+]
